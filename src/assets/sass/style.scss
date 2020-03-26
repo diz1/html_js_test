@@ -1,20 +1,36 @@
 // Vendors
 
-@import 'vendors/reset';				// Сброс CSS
+@import 'vendors/reset';                    // Сброс CSS
+
+
+// Vars
+
+@import 'vars/colors';
+
+
+// Fonts
+
+// Roboto
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=cyrillic');
+
 
 // Blocks
 
 @import 'blocks/container';
+@import 'blocks/button';
+@import 'blocks/main';
+@import 'blocks/block-cards';
+@import 'blocks/table-cards';
+
 
 // Interface
 
-body {
-    color: white;
-    background-color: $bg-main;
+html {
     font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
 
-    
-    background-image: url('../img/header/main-bg.jpg');
-    background-repeat: repeat-x;
-    background-position: top center;
+.align-center {    
+    display: flex;
+    align-items: center;
 }
