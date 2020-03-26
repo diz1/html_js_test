@@ -1,6 +1,26 @@
 .main {
     
     &__inner {
-        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
+    &-table {
+        margin: 0 auto;
+        max-width: 800px;
+        display: none;
+
+        margin-bottom: 10px;
+        background-color: #cef8ff;
+        
+        &__inner {
+            display: table-row;
+            border-bottom: 3px solid $brd;
+        }
+
+		&__item {
+            display: table-cell;
+            width: $cw;
+            padding: 20px 0;
+		}
     }
 }

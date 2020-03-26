@@ -19,14 +19,20 @@
         padding: 15px;
     }
 
+    &__header {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
     &__id {
         font-size: 10px;
         color: $id;
     }
 
     &__image {
-        width: 100px;
-        height: 100px;
+        align-self: center;
+        width: 200px;
     }
 
     &__title {

@@ -1,0 +1,28 @@
+.nav {
+
+    position: fixed;
+    right: 0;
+    left: 0;
+    
+    top: 20px;
+    margin: auto;
+
+    &-list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    
+    &__item {
+        padding: 10px;
+        background-color: #00ac95;
+        color: #ffffff;
+        
+        margin-right: 30px;
+
+        cursor: pointer;
+
+        user-select: none;
+    }
+}
