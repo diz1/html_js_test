@@ -1,0 +1,33 @@
+// Vendors
+
+@import 'vendors/reset';				// Сброс CSS
+//@import 'vendors/bootstrap-grid';		// Сетка
+
+
+// Vars
+
+@import 'vars/colors';					// Цвета
+@import 'vars/fonts';					// Шрифты
+@import 'vars/button';					// Кнопка
+
+
+// Blocks
+
+@import 'blocks/container';
+@import 'blocks/header';
+@import 'blocks/main';
+@import 'blocks/nav';
+
+
+// Interface
+
+body {
+    color: white;
+    background-color: $bg-main;
+    font-family: 'Roboto', sans-serif;
+
+    
+    background-image: url('../img/header/main-bg.jpg');
+    background-repeat: repeat-x;
+    background-position: top center;
+}
