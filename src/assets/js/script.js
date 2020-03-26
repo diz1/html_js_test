@@ -1,3 +1,4 @@
+'use strict';
 const cardButtons = document.querySelectorAll('.block-cards__button');
 const cardPrices = document.querySelectorAll('.block-cards__price');
 
