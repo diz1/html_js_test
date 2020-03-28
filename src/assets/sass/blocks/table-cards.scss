@@ -1,3 +1,7 @@
+.table_cell {
+    vertical-align: middle;
+}
+
 .table-cards {
     
     &__inner {
@@ -8,6 +12,7 @@
 
     &__item {
         display: table-row;
+        border: 1px solid black;
     }
 
     &__header {

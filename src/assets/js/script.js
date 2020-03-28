@@ -9,14 +9,22 @@ const $ = (sel) => {
 
 // Получаем элементы
 
-const cardTablePrices = document.querySelectorAll('.table-cards__price'),
+const cardBlockButtons = document.querySelectorAll('.block-cards__button'),
+    cardBlockPrices = document.querySelectorAll('.block-cards__price'),
+    cards = document.querySelectorAll('.change_me'),
+    cardTablePrices = document.querySelectorAll('.table-cards__price'),
+    cardsDescr = document.querySelectorAll('.table-cards__description'),
     tableTrigger = $('#table'),
     cardsTrigger = $('#cards'),
     table = $('.main-table'),
-    cardBlockButtons = document.querySelectorAll('.block-cards__button'),
-    cardBlockPrices = document.querySelectorAll('.block-cards__price');
+    container = $('.container'),
+    tableRow = $('.table_row'),
+    tableCells = document.querySelectorAll('.table_cell');
 
-    const cards = document.querySelectorAll('.change_me');
+let state = {
+    isCards: true,
+    isTable: false
+};
 
 cardBlockButtons.forEach(item => {
     if (item.textContent === '') {
@@ -36,6 +44,14 @@ cardBlockPrices.forEach(item => {
 cardsTrigger.addEventListener('click', e => {
 
     table.style.display = 'none';
+    state.isTable = false;
+    state.isCards = true;
+    tableCells.forEach(item => {
+        item.style.borderBottom = 'none';
+        item.style.display = 'flex';
+        item.style.padding = '0';
+        item.style.width = 'auto';
+    });
 
 
     // Заменяем классы
@@ -58,7 +74,43 @@ cardsTrigger.addEventListener('click', e => {
 tableTrigger.addEventListener('click', e => {
     
     table.style.display = 'table';
+    state.isTable = true;
+    state.isCards = false;
     
+    tableCells.forEach(item => {
+        item.style.borderBottom = '1px solid black';
+        item.style.paddingTop = '5px';
+        item.style.display = 'table-cell';
+    });
+
+    if (window.outerWidth <= 493 || window.innerWidth <= 493) {
+        container.classList.remove('align-center');
+        
+        tableCells.forEach(item => {
+            item.style.width = `${tableRow.offsetWidth / 4}px`;
+            if (window.outerWidth <= 390 || window.innerWidth <= 390 && state.isTable) {
+
+                if (item.localName === 'h3') {
+                    const shortText = item.textContent.slice(0, 20);
+                    item.textContent = `${shortText}...`;
+                }
+
+                if (item.localName === 'p') {
+                    item.style.display = 'none';
+                }
+                tableRow.children[2].style.display = 'none';
+                item.style.width = `${tableRow.offsetWidth / 3}px`;
+            } else if (window.outerWidth <= 390 || window.innerWidth <=390 && state.isCards) {
+                if (item.localName === 'p') {
+                    item.style.display = 'block';
+                }
+            }
+        });
+    } else {
+        tableCells.forEach(item => {
+            item.style.width = `300px`;
+        });
+    }
 
     // Заменяем классы
 
@@ -76,3 +128,62 @@ tableTrigger.addEventListener('click', e => {
         item.classList.replace('block-cards__button',       'table-cards__button');
     });
 });
+
+
+// Если открыли с устройства с шириной экрана меньше или равной 768px убираем выравнивание по умолчанию
+if (window.outerWidth <= 768 || window.innerWidth <= 768) {
+    container.classList.remove('align-center');
+} else {
+    container.classList.add('align-center');
+}
+
+// Убираем выравнивание по центру для экранов с шириной не выше 768px
+
+window.addEventListener('resize', e => {
+    
+    if (window.outerWidth <= 768 || window.innerWidth <= 768) {
+        container.classList.remove('align-center');
+    } else {
+        container.classList.add('align-center');
+    }
+
+    tableCells.forEach(item => {
+        if (state.isTable) {
+            item.style.display = 'table-cell';
+        }
+    });
+    
+
+    if (state.isTable) {
+        if (window.outerWidth <= 493 || window.innerWidth <= 493) {
+            container.classList.remove('align-center');
+            
+            tableCells.forEach(item => {
+                item.style.width = `${tableRow.offsetWidth / 4}px`;
+                if (window.outerWidth <= 390 || window.innerWidth <= 390 && state.isTable) {
+                    if (item.localName === 'h3') {
+                        const shortText = item.textContent.slice(0, 20);
+                        item.textContent = `${shortText}...`;
+                    }
+
+                    if (item.localName === 'p') {
+                        item.style.display = 'none';
+                    }
+                    tableRow.children[2].style.display = 'none';
+                    item.style.width = `${tableRow.offsetWidth / 3}px`;
+                } else if (window.outerWidth <= 390 || window.innerWidth <=390 && state.isCards) {
+                    if (item.localName === 'p') {
+                        item.style.display = 'block';
+                    }
+                }
+            });
+        } else {
+            tableCells.forEach(item => {
+                item.style.width = `300px`;
+            });
+        }
+    }
+});
+
+// Оставляем при низкой ширине меньше слов в описании
+
