@@ -1,15 +1,22 @@
-'use strict';
+'use strict'; // Строгий режим
+
+// Сокращение для "document.querySelector"
+
 const $ = (sel) => {
-    document.querySelector(sel);
+    return document.querySelector(sel);
 };
 
-const cardTablePrices = document.querySelectorAll('.table-cards__price'),
-    tableTrigger = document.querySelector('#table'),
-    cardsTrigger = document.querySelector('#cards'),
-    table = document.querySelector('.main-table');
 
-const cardBlockButtons = document.querySelectorAll('.block-cards__button'),
+// Получаем элементы
+
+const cardTablePrices = document.querySelectorAll('.table-cards__price'),
+    tableTrigger = $('#table'),
+    cardsTrigger = $('#cards'),
+    table = $('.main-table'),
+    cardBlockButtons = document.querySelectorAll('.block-cards__button'),
     cardBlockPrices = document.querySelectorAll('.block-cards__price');
+
+    const cards = document.querySelectorAll('.change_me');
 
 cardBlockButtons.forEach(item => {
     if (item.textContent === '') {
@@ -23,10 +30,15 @@ cardBlockPrices.forEach(item => {
     }
 });
 
+
+// Обработчики событий
+
 cardsTrigger.addEventListener('click', e => {
-    const cards = document.querySelectorAll('.change_me');
 
     table.style.display = 'none';
+
+
+    // Заменяем классы
 
     cards.forEach(item => {
         item.classList.replace('table-cards',               'block-cards');
@@ -44,10 +56,12 @@ cardsTrigger.addEventListener('click', e => {
 });
 
 tableTrigger.addEventListener('click', e => {
-    const cards = document.querySelectorAll('.change_me');
     
     table.style.display = 'table';
     
+
+    // Заменяем классы
+
     cards.forEach(item => {
         item.classList.replace('block-cards',               'table-cards');
         item.classList.replace('block-cards__inner',        'table-cards__inner');
@@ -62,34 +76,3 @@ tableTrigger.addEventListener('click', e => {
         item.classList.replace('block-cards__button',       'table-cards__button');
     });
 });
-
-
-
-// tableTrigger.addEventListener('click', e => {
-//     const tableCards = $('.table-cards'),
-//         tableCardsInner = $('.table-cards__inner'),
-//         tableCardsItem = $('.table-cards__item'),
-//         tableCardsHeader = $('.table-cards__header'),
-//         tableCardsId = $('.table-cards__id'),
-//         tableCardsImage = $('.table-cards__image'),
-//         tableCardsTitle = $('.table-cards__title'),
-//         tableCardsDescription = $('.table-cards__description'),
-//         tableCardsPrices = $('.table-cards__prices'),
-//         tableCardsPrice = $('.table-cards__price'),
-//         tableCardsButton = $('.table-cards__button');
-
-//     if (tableCards.className === 'table-cards') {
-//         tableCards.classList.remove('table-cards');
-//         tableCardsInner.classList.remove('table-cards__inner');
-//         tableCardsItem.classList.remove('table-cards__item');
-//         tableCardsHeader.classList.remove('table-cards__header');
-//         tableCardsId.classList.remove('table-cards__id');
-//         tableCardsImage.classList.remove('table-cards__image');
-//         tableCardsTitle.classList.remove('table-cards__title');
-//         tableCardsDescription.classList.remove('table-cards__description');
-//         tableCardsPrices.classList.remove('table-cards__prices');
-//         tableCardsPrice.classList.remove('table-cards__price');
-//         tableCardsButton.classList.remove('table-cards__button');
-        
-//     }
-// })

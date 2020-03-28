@@ -16,7 +16,25 @@
 				<ul class="nav-list">
 					<li class="nav__item" id="table">Таблица</li>
 					<li class="nav__item" id="cards">Карточки</li>
-					<li class="nav__item" id="menu">Dropdown-меню</li>
+					<li class="nav__item" id="menu">Dropdown-меню
+						<ul class="dropdown dropdown__level-1 dropdown_yellow">
+							<li class="dropdown__item">L1 Item 1</li>
+							<li class="dropdown__item">L1 Item 2</li>
+							<li class="dropdown__item">L1 Dropdown 3
+								<ul class="dropdown dropdown__level-2 dropdown_blue">
+									<li class="dropdown__item">L2 Item 1</li>
+									<li class="dropdown__item">L2 Item 2</li>
+									<li class="dropdown__item">L2 Dropdown 3
+										<ul class="dropdown dropdown__level-3 dropdown_red">
+											<li class="dropdown__item">L3 Item 1</li>
+											<li class="dropdown__item">L3 Item 2</li>
+											<li class="dropdown__item">L3 Dropdown 3</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
 				</ul>
 			</nav>
 			<table class="main-table">
