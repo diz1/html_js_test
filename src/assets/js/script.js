@@ -19,7 +19,8 @@ const cardBlockButtons = document.querySelectorAll('.block-cards__button'),
     table = $('.main-table'),
     container = $('.container'),
     tableRow = $('.table_row'),
-    tableCells = document.querySelectorAll('.table_cell');
+    tableCells = document.querySelectorAll('.table_cell'),
+    blockTitles = document.querySelectorAll('.block-cards__title');
 
 let state = {
     isCards: true,
@@ -138,7 +139,6 @@ if (window.outerWidth <= 768 || window.innerWidth <= 768) {
 }
 
 // Убираем выравнивание по центру для экранов с шириной не выше 768px
-
 window.addEventListener('resize', e => {
     
     if (window.outerWidth <= 768 || window.innerWidth <= 768) {
@@ -185,5 +185,48 @@ window.addEventListener('resize', e => {
     }
 });
 
-// Оставляем при низкой ширине меньше слов в описании
+// Отправка input
 
+window.addEventListener('click', e => {
+    const target = e.target,
+        input = document.createElement('input'),
+        data = {
+            text: ''
+        };
+
+    if (target.classList.contains('block-cards__title')) {
+        target.before(input);
+        target.style.display = 'none';
+        input.style.border = 'none';
+        input.value = target.textContent;
+        input.style.fontWeight = '700';
+        input.style.fontSize = '16px';
+        input.style.color = '#00B7FF';
+        input.autofocus = true;
+
+        input.addEventListener('keypress', e => {
+            if (e.keyCode === 13) {
+                let xhr = new XMLHttpRequest();
+                const reqReadyStateChange = () => {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        document.getElementById("output").innerHTML=xhr.responseText;
+                    }
+                };
+                const body = `text=${data.text}`;
+
+                xhr.open("POST", "http://localhost:3000/assets/test.txt");
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = reqReadyStateChange;
+                xhr.send(body);
+                target.textContent = input.value;
+                target.style.display = 'block';
+                input.parentNode.removeChild(input);
+                
+                return false;
+            }
+        });
+
+    }
+    
+});
+ 
