@@ -190,36 +190,31 @@ window.addEventListener('resize', e => {
 window.addEventListener('click', e => {
     const target = e.target,
         input = document.createElement('input'),
-        data = {
-            text: ''
-        };
+        form = document.createElement('form');
 
     if (target.classList.contains('block-cards__title')) {
-        target.before(input);
+        target.before(form);
+        form.name = 'card_header_id';
+        form.method = 'POST';
+        form.action = './data.php';
+        form.style.padding = '0';
+        form.append(input);
         target.style.display = 'none';
         input.style.border = 'none';
         input.value = target.textContent;
         input.style.fontWeight = '700';
         input.style.fontSize = '16px';
+        input.style.fontFamily = 'Roboto';
+        input.style.padding = '0';
+        input.style.marginBottom = '10px';
         input.style.color = '#00B7FF';
         input.autofocus = true;
 
         input.addEventListener('keypress', e => {
             if (e.keyCode === 13) {
-                let xhr = new XMLHttpRequest();
-                const reqReadyStateChange = () => {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        document.getElementById("output").innerHTML=xhr.responseText;
-                    }
-                };
-                const body = `text=${data.text}`;
-
-                xhr.open("POST", "http://localhost:3000/assets/test.txt");
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.onreadystatechange = reqReadyStateChange;
-                xhr.send(body);
                 target.textContent = input.value;
                 target.style.display = 'block';
+                form.parentNode.removeChild(form);
                 input.parentNode.removeChild(input);
                 
                 return false;
